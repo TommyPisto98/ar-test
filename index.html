@@ -6,7 +6,7 @@
         AFRAME.registerComponent('videohandler', {
             init: function () {
                 var marker = this.el;
-                this.vid = "";
+                this.vid = document.querySelector("#vid");
 
                 marker.addEventListener('markerFound', function () {
                     if (this.marker.url == 'https://tommypisto98.github.io/ar-test/nft/ar_img_2_h') {
