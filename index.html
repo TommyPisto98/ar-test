@@ -4,19 +4,17 @@
 <script>
     window.onload = function() {
         AFRAME.registerComponent('videohandler', {
+            schema: {
+                src: {type: 'string', default=''}
+            },
+
             init: function () {
                 var marker = this.el;
-                
+
 				// In base al marker trovato vado a prendere il #vid corrispondente (?)
                 marker.addEventListener('markerFound', function () {
-                    if (marker.id == "marker1") {
-                        this.vid = document.QuerySelector("#vid1");
-                        this.vid.play();
-                    }
-                    else if (marker.id == "marker2") {
-                        this.vid = document.querySelector("#vid2");
-                        this.vid.play();
-                    }
+                    this.vid = document.querySelector(this.data.src);
+                    this.vid.play();
                 }.bind(this));
 
 		marker.addEventListener('markerLost', function() {
