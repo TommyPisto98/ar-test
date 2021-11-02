@@ -4,10 +4,6 @@
 <script>
     window.onload = function() {
         AFRAME.registerComponent('videohandler', {
-            schema: {
-                src: {type: 'string', default=''}
-            },
-
             init: function () {
                 var marker = this.el;
 
@@ -69,13 +65,13 @@
 
         <a-nft
             videohandler
-            type='nft' url='https://tommypisto98.github.io/ar-test/nft/2_94_PPI' id="marker1"
+            type='nft' url='https://tommypisto98.github.io/ar-test/nft/2_94_PPI' id="marker"
             smooth="true" smoothCount="10" smoothTolerance="0.01" smoothThreshold="5"
             >
             <a-video
                 src="#vid"
                 position='10 0 0'
-                rotation='0 0 180'
+                rotation='90 0 180'
                 width='160'
                 height='90'
                 >
@@ -83,13 +79,13 @@
         </a-nft>
 	    <a-nft
 		    videohandler
-		    type='nft' url='https://tommypisto98/github.io/ar-test/nft/ar_img_2h' id="marker2"
+		    type='nft' url='https://tommypisto98/github.io/ar-test/nft/ar_img_2h' id="marker"
 		    smooth="true" smoothCount="10" smoothTolerance="0.01" smoothThreshold="5"
 	        >
 		    <a-video
 			    src="#vid"
 			    position='10 0 0'
-			    rotation='0 0 180'
+			    rotation='90 0 180'
 			    width='160'
 			    height='90'
 			    >
