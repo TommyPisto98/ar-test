@@ -6,16 +6,17 @@
         AFRAME.registerComponent('videohandler', {
             init: function () {
                 var marker = this.el;
+                this.vid = "";
 
                 marker.addEventListener('markerFound', function () {
                     if (this.marker.url == 'https://tommypisto98.github.io/ar-test/nft/ar_img_2_h') {
                         this.vid = document.querySelector("vid2");
-                        this.vid.play();
                     }
                     else if (this.marker.url == 'https://tommypisto98.github.io/ar-test/nft/2_94_PPI') {
                         this.vid = document.querySelector("vid1");
-                        this.vid.play();
                     }
+
+                    this.vid.play();
                 }.bind(this));
 
 		marker.addEventListener('markerLost', function() {
