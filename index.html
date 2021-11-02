@@ -7,7 +7,7 @@
             init: function () {
                 var marker = this.el;
 
-                marker.addEventListener('markerFound', function() {
+                marker.addEventListener('markerFound', function () {
                     if (this.marker.url == 'https://tommypisto98.github.io/ar-test/nft/ar_img_2_h') {
                         this.vid = document.querySelector("vid2");
                         this.vid.play();
@@ -74,7 +74,7 @@
             smooth="true" smoothCount="2" smoothTolerance="0.01" smoothThreshold="2"
             >
             <a-video
-                src="vid1"
+                src="#vid1"
                 position='0 0 -150'
                 rotation='90 0 180'
                 width='160'
@@ -88,7 +88,7 @@
 		    smooth="true" smoothCount="2" smoothTolerance="0.01" smoothThreshold="2"
 	        >
 		    <a-video
-			    src="vid2"
+			    src="#vid2"
 			    position='0 0 -150'
 			    rotation='90 0 180'
 			    width='160'
