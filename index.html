@@ -8,8 +8,18 @@
                 var marker = this.el;
 
                 marker.addEventListener('markerFound', function () {
+                    if (this.marker.url == 'https://tommypisto98.github.io/ar-test/nft/ar_img_2_h') {
+                        this.vid = document.querySelector("#vid2");
+                        this.vid.play();
+                    }
+                    else if (this.marker.url == 'https://tommypisto98.github.io/ar-test/nft/2_94_PPI') {
+                        this.vid = document.querySelector("#vid1");
+                        this.vid.play();
+                    }
+                    /*
                     this.vid = document.querySelector("#vid");
                     this.vid.play();
+                    */
                 }.bind(this));
 
 		marker.addEventListener('markerLost', function() {
@@ -52,14 +62,12 @@
         embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false; patternRatio: 0.75; maxDetectionRate: 60 detectionMode: mono'>
 
         <a-assets>
-            <!--
             <video src="https://tommypisto98.github.io/ar-test/media/640_10sec.mp4"
-             	preload="auto" id="vid" response-type="arraybuffer" loop
+             	preload="auto" id="vid1" response-type="arraybuffer" loop
              	crossorigin webkit-playsinline autoplay muted playsinline>
             </video>
-            -->
 	        <video src="https://tommypisto98.github.io/ar-test/media/pemvideo_clip_ar_2_1024.mp4"
-	            preload="auto" id="vid" response-type="arraybuffer" loop
+	            preload="auto" id="vid2" response-type="arraybuffer" loop
 		        crossorigin webkit-playsinline autoplay playsinline>
 	        </video>
         </a-assets>
@@ -70,9 +78,9 @@
             smooth="true" smoothCount="2" smoothTolerance="0.01" smoothThreshold="2"
             >
             <a-video
-                src="#vid"
+                src="#vid1"
                 position='0 0 -150'
-                rotation='90 0 180'
+                rotation='90 0 0'
                 width='160'
                 height='90'
                 >
@@ -84,9 +92,9 @@
 		    smooth="true" smoothCount="2" smoothTolerance="0.01" smoothThreshold="2"
 	        >
 		    <a-video
-			    src="#vid"
+			    src="#vid2"
 			    position='0 0 -150'
-			    rotation='90 0 180'
+			    rotation='90 0 0'
 			    width='160'
 			    height='90'
 			    >
