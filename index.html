@@ -10,6 +10,7 @@
                 let video1 = document.querySelector(id=="")
 
 				// In base al marker trovato vado a prendere il #vid corrispondente (?)
+                // O almeno dovrebbe essere così, da capire come gestire i video.
                 marker.addEventListener('markerFound', function () {
                     if (marker.id == 'marker1') {
                         this.vid = document.querySelector("https://tommypisto98.github.io/ar-test/media/640_10sec.mp4");
@@ -77,7 +78,7 @@
             smooth="true" smoothCount="0" smoothTolerance="0.01" smoothThreshold="2"
             >
             <a-video
-                src="https://tommypisto98.github.io/ar-test/media/640_10sec.mp4"
+                src="#vid1"
                 position='10 0 -150'
                 rotation='90 0 180'
                 width='160'
@@ -91,7 +92,7 @@
 		    smooth="true" smoothCount="5" smoothTolerance="0.01" smoothThreshold="2"
 	        >
 		    <a-video
-			    src="https://tommypisto98.github.io/ar-test/media/pemvideo_clip_ar_2_1024.mp4"
+			    src="#vid2"
 			    position='10 0 -150'
 			    rotation='90 0 180'
 			    width='160'
