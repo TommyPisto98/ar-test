@@ -7,8 +7,6 @@
             init: function () {
                 var marker = this.el;
 
-				// In base al marker trovato vado a prendere il #vid corrispondente (?)
-                // O almeno dovrebbe essere così, da capire come gestire i video.
                 marker.addEventListener('markerFound', function () {
                     this.vid = document.querySelector("#vid");
                     this.vid.play();
@@ -54,23 +52,20 @@
         embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false; patternRatio: 0.75; maxDetectionRate: 60 detectionMode: mono'>
 
         <a-assets>
-            <!--
             <video src="https://tommypisto98.github.io/ar-test/media/640_10sec.mp4"
-             	preload="auto" id="vid1" response-type="arraybuffer" loop
+             	preload="auto" id="vid" response-type="arraybuffer" loop
              	crossorigin webkit-playsinline autoplay muted playsinline>
             </video>
-            -->
 	        <video src="https://tommypisto98.github.io/ar-test/media/pemvideo_clip_ar_2_1024.mp4"
 	            preload="auto" id="vid" response-type="arraybuffer" loop
 		        crossorigin webkit-playsinline autoplay playsinline>
 	        </video>
         </a-assets>
 
-        <!--
         <a-nft
             videohandler
             type='nft' url='https://tommypisto98.github.io/ar-test/nft/2_94_PPI'
-            smooth="true" smoothCount="0" smoothTolerance="0.01" smoothThreshold="2"
+            smooth="true" smoothCount="2" smoothTolerance="0.01" smoothThreshold="2"
             >
             <a-video
                 src="#vid"
@@ -81,11 +76,10 @@
                 >
             </a-video>
         </a-nft>
-        -->
 	    <a-nft
 		    videohandler
-		    type='nft' url='https://tommypisto98.github.io/ar-test/nft/ar_img_2_h' 
-		    smooth="true" smoothCount="5" smoothTolerance="0.01" smoothThreshold="2"
+		    type='nft' url='https://tommypisto98.github.io/ar-test/nft/ar_img_2_h'
+		    smooth="true" smoothCount="2" smoothTolerance="0.01" smoothThreshold="2"
 	        >
 		    <a-video
 			    src="#vid"
