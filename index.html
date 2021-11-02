@@ -6,12 +6,17 @@
         AFRAME.registerComponent('videohandler', {
             init: function () {
                 var marker = this.el;
-				// this.vid = "";
-
+                
 				// In base al marker trovato vado a prendere il #vid corrispondente (?)
                 marker.addEventListener('markerFound', function () {
-					this.vid = document.querySelector("#vid");
-                    this.vid.play();
+                    if (marker.id == "marker1") {
+                        this.vid = document.QuerySelector("#vid1");
+                        this.vid.play();
+                    }
+                    else if (marker.id == "marker2") {
+                        this.vid = document.querySelector("#vid2");
+                        this.vid.play();
+                    }
                 }.bind(this));
 
 		marker.addEventListener('markerLost', function() {
@@ -54,23 +59,23 @@
         embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false; patternRatio: 0.75; maxDetectionRate: 60 detectionMode: mono'>
 
         <a-assets>
-            <video src="https://tommypisto98.github.io/ar-test/640_10sec.mp4"
-             	preload="auto" id="vid" response-type="arraybuffer" loop
+            <video src="https://tommypisto98.github.io/ar-test/media/640_10sec.mp4"
+             	preload="auto" id="vid1" response-type="arraybuffer" loop
              	crossorigin webkit-playsinline autoplay muted playsinline>
             </video>
-	    <video src="https://tommypisto98.github.io/ar-test/pemvideo_clip_ar_2.mp4"
-	        preload="auto" id="vid" response-type="arraybuffer" loop
+	    <video src="https://tommypisto98.github.io/ar-test/media/pemvideo_clip_ar_2.mp4"
+	        preload="auto" id="vid2" response-type="arraybuffer" loop
 		crossorigin webkit-playsinline autoplay playsinline>
 	    </video>
         </a-assets>
 
         <a-nft
             videohandler
-            type='nft' url='https://tommypisto98.github.io/ar-test/nft/2_94_PPI'
+            type='nft' url='https://tommypisto98.github.io/ar-test/nft/2_94_PPI' id="marker1"
             smooth="true" smoothCount="0" smoothTolerance="0.0001" smoothThreshold="2"
         >
             <a-video
-                src="#vid"
+                src="#vid1"
                 position='50 150 -100'
                 rotation='90 0 180'
                 width='160'
@@ -80,11 +85,11 @@
         </a-nft>
 	<a-nft
 		videohandler
-		type='nft' url='https://tommypisto98/github.io/ar-test/nft/ar_img_2h'
+		type='nft' url='https://tommypisto98/github.io/ar-test/nft/ar_img_2h' id="marker2"
 		smooth="true" smoothCount="0" smoothTolerance="0.0001" smoothThreshold="2"
 	>
 		<a-video
-			src="#vid"
+			src="#vid2"
 			position='50 150 -100'
 			rotation='90 0 180'
 			width='160'
