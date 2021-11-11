@@ -1,111 +1,116 @@
-<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
-<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-<script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js'></script>
-<script>
-    window.onload = function() {
-        AFRAME.registerComponent('videohandler', {
-            init: function () {
-                var marker = this.el;
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Agumented Reality - TEST</title>
 
-                marker.addEventListener('markerFound', function () {
-                   /*
-			if (this.marker.url == 'https://tommypisto98.github.io/ar-test/nft/ar_img_2_h') {
-                        this.vid = document.querySelector("#vid2");
-                    }
-                    else if (this.marker.url == 'https://tommypisto98.github.io/ar-test/nft/2_94_PPI') {
-                        this.vid = document.querySelector("#vid1");
-                    }
-		    */
-		            this.vid = document.querySelector("#vid1");
-                    this.vid.play();
-                }.bind(this));
+        <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js'></script>
+        <script>
+            window.onload = function() {
+                AFRAME.registerComponent('videohandler', {
+                    init: function () {
+                        var marker = this.el;
 
-		marker.addEventListener('markerLost', function() {
-			this.vid.pause();
-			this.vid.currentTime = 0;
-		}.bind(this));
+                        marker.addEventListener('markerFound', function () {
+                            /*
+			                if (this.marker.url == 'https://tommypisto98.github.io/ar-test/nft/ar_img_2_h') {
+                                this.vid = document.querySelector("#vid2");
+                            }
+                            else if (this.marker.url == 'https://tommypisto98.github.io/ar-test/nft/2_94_PPI') {
+                                this.vid = document.querySelector("#vid1");
+                            }
+		                    */
+		                    this.vid = document.querySelector("#vid1");
+                            this.vid.play();
+                        }.bind(this));
+
+		                marker.addEventListener('markerLost', function() {
+			                this.vid.pause();
+			                this.vid.currentTime = 0;
+		                }.bind(this));
+                    }
+                });
+            };
+        </script>
+
+        <style>
+            .arjs-loader {
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: rgba(0, 0, 0, 0.8);
+                z-index: 9999;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
-        });
-    };
-</script>
 
-<style>
-    .arjs-loader {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.8);
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+            .arjs-loader div {
+                text-align: center;
+                font-size: 1.25em;
+                color: white;
+            }
+        </style>
+    </head>
 
-    .arjs-loader div {
-        text-align: center;
-        font-size: 1.25em;
-        color: white;
-    }
-</style>
+    <body style='margin : 0px; overflow: hidden;'>
+        <div class="arjs-loader">
+            <div>Loading, please wait...</div>
+        </div>
 
-<head>
-    <meta charset="utf-8">
-    <title>Agumented Reality - TEST</title>
-</head>
-<body style='margin : 0px; overflow: hidden;'>
-    <div class="arjs-loader">
-        <div>Loading, please wait...</div>
-    </div>
-    <a-scene
-        vr-mode-ui="enabled: false;"
-        renderer='antialias: true; alpha: true; precision: medium;'
-        embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false; patternRatio: 0.75; maxDetectionRate: 60 detectionMode: mono'>
+        <a-scene
+            vr-mode-ui="enabled: false;"
+            renderer='antialias: true; alpha: true; precision: medium;'
+            embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false; patternRatio: 0.75; maxDetectionRate: 60 detectionMode: mono'>
 
-        <a-assets>
+            <a-assets>
+                <video src="https://tommypisto98.github.io/ar-test/media/pemvideo_clip_ar_2_1024.mp4"
+             	    preload="auto" id="vid1" response-type="arraybuffer" loop
+             	    crossorigin webkit-playsinline autoplay playsinline>
+                </video>
+		        <!--
+	            <video src="https://tommypisto98.github.io/ar-test/media/640_10sec.mp4"
+	                preload="auto" id="vid2" response-type="arraybuffer" loop
+		            crossorigin webkit-playsinline autoplay muted playsinline>
+	            </video>
+		        -->
+            </a-assets>
 
-            <video src="https://tommypisto98.github.io/ar-test/media/640_10sec.mp4"
-             	preload="auto" id="vid1" response-type="arraybuffer" loop
-             	crossorigin webkit-playsinline autoplay muted playsinline>
-            </video>
-		<!--
-	        <video src="https://tommypisto98.github.io/ar-test/media/pemvideo_clip_ar_2_1024.mp4"
-	            preload="auto" id="vid2" response-type="arraybuffer" loop
-		        crossorigin webkit-playsinline autoplay playsinline>
-	        </video>
-		-->
-        </a-assets>
-	<!--
-        <a-nft
-            videohandler
-            type='nft' url='https://tommypisto98.github.io/ar-test/nft/2_94_PPI'
-            smooth="true" smoothCount="2" smoothTolerance="0.01" smoothThreshold="2"
-            >
-            <a-video
-                src="#vid2"
-                position='0 0 -150'
-                rotation='90 0 180'
-                width='160'
-                height='90'
-                >
-            </a-video>
-        </a-nft>
-	-->
-	    <a-nft
-		    videohandler
-		    type='nft' url='https://tommypisto98.github.io/ar-test/nft/ar_img_2_h'
-		    smooth="true" smoothCount="2" smoothTolerance="0.01" smoothThreshold="2"
-	        >
-		    <a-video
-			    src="#vid1"
-                position='50 0 0'
-                rotation='90 0 180'
-			    width='100'
-			    height='70'
-			    >
-		    </a-video>
-	    </a-nft>
-	<a-entity camera></a-entity>
-	</a-scene>
-</body>
+	        <!--
+            <a-nft
+                videohandler
+                type='nft' url='https://tommypisto98.github.io/ar-test/nft/2_94_PPI'
+                smooth="true" smoothCount="2" smoothTolerance="0.01" smoothThreshold="2">
+                <a-video
+                    src="#vid2"
+                    position='0 0 -150'
+                    rotation='90 0 180'
+                    width='160'
+                    height='90'>
+                </a-video>
+            </a-nft>
+	        -->
+
+            <!-- Associo al marker nft il video che voglio far partire -->
+	        <a-nft
+		        videohandler
+		        type='nft' url='https://tommypisto98.github.io/ar-test/nft/ar_img_2_h'
+		        smooth="true" smoothCount="2" smoothTolerance="0.01" smoothThreshold="2">
+		        <a-video
+			        src="#vid1"
+                    position='50 0 0'
+                    rotation='-90 0 0'
+			        width='100'
+			        height='70'>
+		        </a-video>
+	        </a-nft>
+
+	        <a-entity camera></a-entity>
+
+	    </a-scene>
+    </body>
+</html>
