@@ -1,0 +1,123 @@
+<!-- 
+    Funzionamento SW: questa pagina viene raggiunta leggendo il qrcode associato alla cartolina, ogni qrcode porta con se l'id della cartolina, questo permette 
+    di eseguire una query (all'apertura di questo link) per recuperare i marker e il video associati alla foto.
+
+    Non sono state apportate modifiche specifiche a questo file, in quanto vengono comunque usati i marker generati dalla foto per il tracking del video, 
+    il qrcode viene usato solo per aprire la pagina ed eseguire la query che carichi il video e i marker associati nel backend.
+
+    Per ovvi motivi, essendo questo un test senza il supporto di un database, non è stato possibile testare il passaggio di valori da qrcode e il retrieve 
+    dei dati tramite query.
+
+    Da ragionare su come gestire la pagina nel caso in cui l'utente la apra senza passare dal qrcode (cioè senza che venga passato l'id della cartolina per 
+    recuperare video e marker associati). Si potrebbe fare in modo, tramite il javascript, che se viene caricata la pagina senza il passaggio di valori, 
+    la fotocamera permetta la lettura del qrcode(?).
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Agumented Reality - TEST</title>
+
+        <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js'></script>
+        <script>
+
+            /* 
+            Leggo l'url e prendo i parametri passati con GET (quelli dopo il ?), nel nostro caso l'id della cartolina recuperato 
+            dalla lettura del qrcode.
+            
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+
+            // Se tra i parametri passati si trova l'id (per adesso non funziona perchè siamo ancora in test) eseguo la query 
+            // e recupero il video ed i marker nft della foto.
+            if (urlParams.has("id")) {
+
+                const id = urlParams.get("id");
+
+            }
+            */
+
+            window.onload = function() {
+                AFRAME.registerComponent('videohandler', {
+                    init: function () {
+                        var marker = this.el;
+
+                        marker.addEventListener('markerFound', function () {
+		                    this.vid = document.querySelector("#vid");
+                            this.vid.play();
+                        }.bind(this));
+
+		                marker.addEventListener('markerLost', function() {
+			                this.vid.pause();
+			                this.vid.currentTime = 0;
+		                }.bind(this));
+                    }
+                });
+            };
+        </script>
+
+        <style>
+            .arjs-loader {
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: rgba(0, 0, 0, 0.8);
+                z-index: 9999;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .arjs-loader div {
+                text-align: center;
+                font-size: 1.25em;
+                color: white;
+            }
+        </style>
+    </head>
+
+    <body style='margin : 0px; overflow: hidden;'>
+        <div class="arjs-loader">
+            <div>Loading, please wait...</div>
+        </div>
+
+        <a-scene
+            vr-mode-ui="enabled: false;"
+            renderer='antialias: true; alpha: true; precision: medium;'
+            embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false; patternRatio: 0.75; maxDetectionRate: 60 detectionMode: mono'>
+
+            <a-assets>
+	            <video src="https://tommypisto98.github.io/ar-test/media/pemvideo_clip_ar_1_1024V.mp4"
+	                preload="auto" id="vid" response-type="arraybuffer" loop
+		            crossorigin webkit-playsinline autoplay playsinline>            <!-- muted -->
+	            </video>
+            </a-assets>
+
+            <!-- Associo al qrcode il video che voglio far partire -->
+	        <a-nft
+		        videohandler
+		        type='nft' url='https://tommypisto98.github.io/ar-test/nft/test_ar'
+		        smooth="true" smoothCount="2" smoothTolerance="0.01" smoothThreshold="2">
+		        <a-video
+			        src="#vid"
+                    position='50 0 0'
+                    rotation='-90 0 0'
+			        width='100'
+			        height='70'>
+		        </a-video>
+	        </a-nft>
+
+            <!--
+                La videocamera in se, in questo modo il punto di ancoraggio del video non sarà il centro dello schermo ma i 
+                valori nft che abbiamo passato.
+            -->
+	        <a-entity camera></a-entity>
+
+	    </a-scene>
+    </body>
+</html>
